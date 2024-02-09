@@ -64,7 +64,7 @@ public class GroceryServiceImpl implements GroceryService {
         if (updatedItem == null) {
             throw new IllegalArgumentException("Updated grocery item cannot be null");
         }
-        updatedItem.setId(itemId);
+        //updatedItem.setId(itemId);
         groceryItemRepository.save(updatedItem);
     }
 
@@ -82,7 +82,7 @@ public class GroceryServiceImpl implements GroceryService {
         Optional<GroceryItem> optionalItem = groceryItemRepository.findById(itemId);
         if (optionalItem.isPresent()) {
             GroceryItem item = optionalItem.get();
-            item.setInventory(newInventoryLevel);
+         //   item.setInventory(newInventoryLevel);
             try {
                 groceryItemRepository.save(item);
             }
@@ -109,11 +109,11 @@ public class GroceryServiceImpl implements GroceryService {
     @Override
     public List<OrderItem> getOrderById(Long orderId) {
         try {
-            return orderItemRepository.findByOrderId(orderId);
+            return orderItemRepository.findByOrderItemId(orderId);
         }catch (DataAccessException e) {
             throw new RuntimeException("Database query failed while removing grocery item", e);
         }
-    }Or
+    }
 
     @Override
     public List<OrderItem> getAllOrders() {

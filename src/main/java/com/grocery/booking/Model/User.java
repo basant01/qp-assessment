@@ -2,27 +2,21 @@ package com.grocery.booking.Model;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.grocery.booking.Enum.Role;
+import lombok.*;
 
 
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-
-    private String emailId;
     private String username;
     private String password; 
     private String role;
-
 }

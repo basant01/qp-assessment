@@ -1,8 +1,15 @@
 package com.grocery.booking.Service.Impl;
 
+import com.grocery.booking.Model.OrderItem;
+import com.grocery.booking.Model.UserOrder;
+import com.grocery.booking.Repository.OrderItemRepository;
+import com.grocery.booking.Repository.UserOrderRepository;
 import com.grocery.booking.Service.UserOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserOrderServiceImpl implements UserOrderService {
@@ -31,7 +38,7 @@ public class UserOrderServiceImpl implements UserOrderService {
 
     @Override
     public UserOrder updateOrder(Long orderId, UserOrder updatedOrder) {
-        updatedOrder.setId(orderId);
+       // updatedOrder.setId(orderId);
         return userOrderRepository.save(updatedOrder);
     }
 
@@ -42,6 +49,6 @@ public class UserOrderServiceImpl implements UserOrderService {
 
     @Override
     public List<OrderItem> getOrderItemsByOrderId(Long orderId) {
-        return orderItemRepository.findByOrderId(orderId);
+        return orderItemRepository.findByOrderItemId(orderId);
     }
 }

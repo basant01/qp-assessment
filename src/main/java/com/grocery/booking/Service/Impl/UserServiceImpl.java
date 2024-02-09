@@ -3,18 +3,22 @@ package com.grocery.booking.Service.Impl;
 import com.grocery.booking.Model.User;
 import com.grocery.booking.Repository.UserRepository;
 import com.grocery.booking.Service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
     public class UserServiceImpl implements UserService {
 
         @Autowired
         private UserRepository userRepository;
 
+    private final BCryptPasswordEncoder passwordEncoder;
         @Override
         public List<User> getAllUsers() {
             return userRepository.findAll();
@@ -28,6 +32,7 @@ import java.util.Optional;
 
         @Override
         public User createUser(User user) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             return userRepository.save(user);
         }
 
@@ -37,7 +42,6 @@ import java.util.Optional;
         User existingUser = getUserById(userId);
         if (existingUser != null) {
             // Update attributes that are allowed to be modified
-            existingUser.setEmailId(updatedUser.getEmailId());
             existingUser.setUsername(updatedUser.getUsername());
             existingUser.setPassword(updatedUser.getPassword());
             existingUser.setRole(updatedUser.getRole());
